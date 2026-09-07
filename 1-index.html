@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>effective accelerationism_</title>
+<meta name="description" content="growth is good. technology is how we got here. it's time to build. everywhere, always_">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='10' fill='white'/%3E%3Ctext x='32' y='46' font-family='monospace' font-size='42' text-anchor='middle' fill='black'%3Ee%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --black:#000;
+  --white:#f4f1ea;
+  --dim:#8a877f;
+  --accent:#ff5a1f;
+  --line:rgba(244,241,234,.14);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  background:var(--black);
+  color:var(--white);
+  font-family:'IBM Plex Mono',ui-monospace,Menlo,Consolas,monospace;
+  font-size:15px;
+  line-height:1.6;
+  overflow-x:hidden;
+}
+::selection{background:var(--white);color:var(--black)}
+a{color:inherit;text-decoration:none}
+img,video{display:block;max-width:100%}
+
+/* ---------- nav ---------- */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  display:flex;justify-content:space-between;align-items:center;
+  padding:18px 28px;
+  mix-blend-mode:difference;
+}
+.nav-mark{
+  font-weight:700;font-size:15px;letter-spacing:.08em;
+  border:1.5px solid var(--white);padding:3px 9px;border-radius:4px;
+}
+.nav-links{display:flex;gap:22px}
+.nav-links a{
+  font-size:12px;letter-spacing:.14em;text-transform:lowercase;color:var(--white);
+  opacity:.75;transition:opacity .2s;
+}
+.nav-links a:hover{opacity:1}
+@media(max-width:720px){.nav-links{display:none}}
+
+/* ---------- hero ---------- */
+.hero{position:relative;height:100vh;min-height:560px;overflow:hidden}
+#dots{position:absolute;inset:0;width:100%;height:100%}
+.hero-inner{
+  position:relative;z-index:2;height:100%;
+  display:flex;flex-direction:column;justify-content:center;align-items:flex-start;
+  padding:0 6vw;pointer-events:none;
+}
+.hero-kicker{font-size:13px;letter-spacing:.28em;color:var(--dim);margin-bottom:18px}
+h1{
+  font-family:'Anton',Impact,sans-serif;
+  font-size:clamp(72px,15vw,220px);
+  line-height:.9;letter-spacing:.01em;font-weight:400;
+  text-transform:uppercase;
+}
+h1 .dot{color:var(--accent)}
+.hero-sub{
+  margin-top:26px;font-size:clamp(14px,1.6vw,19px);color:var(--white);
+  max-width:520px;
+}
+.hero-sub em{color:var(--dim);font-style:normal}
+.scroll-cue{
+  position:absolute;bottom:26px;left:50%;transform:translateX(-50%);
+  z-index:2;font-size:11px;letter-spacing:.3em;color:var(--dim);
+  animation:pulse 2.4s ease-in-out infinite;
+}
+@keyframes pulse{0%,100%{opacity:.35}50%{opacity:1}}
+
+/* ---------- marquee ---------- */
+.marquee{
+  border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+  overflow:hidden;white-space:nowrap;padding:14px 0;
+}
+.marquee span{
+  display:inline-block;padding-right:60px;
+  font-family:'Anton',Impact,sans-serif;font-size:22px;letter-spacing:.06em;
+  text-transform:uppercase;color:var(--dim);
+  animation:slide 30s linear infinite;
+}
+.marquee span b{color:var(--white);font-weight:400}
+@keyframes slide{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* ---------- sections ---------- */
+section{padding:120px 6vw;position:relative}
+.sec-label{
+  font-size:12px;letter-spacing:.3em;color:var(--dim);margin-bottom:14px;
+}
+.sec-label::before{content:"// ";color:var(--accent)}
+h2{
+  font-family:'Anton',Impact,sans-serif;font-weight:400;
+  font-size:clamp(40px,6.5vw,96px);line-height:.95;text-transform:uppercase;
+  margin-bottom:56px;
+}
+h2 .dot{color:var(--accent)}
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .8s ease,transform .8s ease}
+.reveal.in{opacity:1;transform:none}
+
+/* manifesto */
+.theses{max-width:860px}
+.thesis{
+  display:grid;grid-template-columns:80px 1fr;gap:24px;
+  padding:34px 0;border-top:1px solid var(--line);
+}
+.thesis:last-child{border-bottom:1px solid var(--line)}
+.thesis .num{font-size:13px;color:var(--accent);padding-top:3px}
+.thesis h3{
+  font-family:'Anton',Impact,sans-serif;font-weight:400;font-size:clamp(22px,3vw,34px);
+  text-transform:uppercase;letter-spacing:.02em;margin-bottom:10px;
+}
+.thesis p{color:var(--dim);font-size:15px;max-width:640px}
+.thesis p b{color:var(--white);font-weight:500}
+@media(max-width:640px){.thesis{grid-template-columns:52px 1fr;gap:14px}}
+
+/* film */
+.film-wrap{border:1px solid var(--line)}
+.film-wrap video{width:100%;aspect-ratio:16/9;background:#000}
+.film-meta{
+  display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;
+  padding:14px 18px;border-top:1px solid var(--line);
+  font-size:12px;color:var(--dim);letter-spacing:.08em;
+}
+
+/* sound */
+.sound-card{
+  border:1px solid var(--line);padding:34px 28px;
+  display:flex;flex-direction:column;gap:20px;max-width:860px;
+}
+.sound-title{font-family:'Anton',Impact,sans-serif;font-size:clamp(26px,4vw,44px);text-transform:uppercase}
+.sound-note{color:var(--dim);font-size:13px}
+audio{width:100%;height:44px;filter:invert(1) hue-rotate(180deg);opacity:.92}
+.eq{display:flex;align-items:flex-end;gap:3px;height:34px}
+.eq i{width:5px;background:var(--accent);animation:eq 1s ease-in-out infinite;opacity:0}
+.playing .eq i{opacity:1}
+.eq i:nth-child(1){animation-delay:0s}.eq i:nth-child(2){animation-delay:.15s}
+.eq i:nth-child(3){animation-delay:.3s}.eq i:nth-child(4){animation-delay:.45s}
+.eq i:nth-child(5){animation-delay:.6s}.eq i:nth-child(6){animation-delay:.2s}
+.eq i:nth-child(7){animation-delay:.5s}.eq i:nth-child(8){animation-delay:.1s}
+@keyframes eq{0%,100%{height:8px}50%{height:34px}}
+
+/* signals grid */
+.grid-posters{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:18px;
+}
+.grid-posters a{
+  border:1px solid var(--line);overflow:hidden;position:relative;display:block;
+}
+.grid-posters img{width:100%;height:100%;object-fit:cover;transition:transform .6s ease,filter .6s ease}
+.grid-posters a:hover img{transform:scale(1.04);filter:contrast(1.06)}
+.grid-posters .tag{
+  position:absolute;left:12px;bottom:10px;font-size:11px;letter-spacing:.2em;
+  color:var(--white);background:rgba(0,0,0,.65);padding:3px 8px;
+}
+
+/* machine renders */
+.bleed{margin:0 -6vw}
+.bleed figure{position:relative}
+.bleed img{width:100%}
+.bleed figcaption{
+  position:absolute;left:6vw;bottom:24px;font-size:12px;letter-spacing:.24em;
+  color:var(--white);background:rgba(0,0,0,.55);padding:5px 10px;
+}
+.render-row{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:18px}
+.render-row figure{border:1px solid var(--line)}
+.render-row img{width:100%}
+.render-row figcaption{padding:10px 14px;font-size:11px;letter-spacing:.2em;color:var(--dim)}
+@media(max-width:720px){.render-row{grid-template-columns:1fr}}
+
+/* book */
+.book{
+  display:grid;grid-template-columns:minmax(180px,300px) 1fr;gap:48px;align-items:center;
+  border:1px solid var(--line);padding:48px;max-width:960px;
+}
+.book img{border:1px solid var(--line)}
+.book h3{font-family:'Anton',Impact,sans-serif;font-weight:400;font-size:clamp(30px,4.5vw,52px);text-transform:uppercase;margin-bottom:14px}
+.book p{color:var(--dim);max-width:460px}
+.book .avail{margin-top:18px;font-size:12px;letter-spacing:.18em;color:var(--accent)}
+@media(max-width:720px){.book{grid-template-columns:1fr;padding:28px}}
+
+/* footer */
+footer{padding:140px 6vw 60px;text-align:center;border-top:1px solid var(--line)}
+footer .big{
+  font-family:'Anton',Impact,sans-serif;
+  font-size:clamp(64px,14vw,200px);line-height:.9;text-transform:uppercase;
+}
+footer .big .dot{color:var(--accent)}
+footer .tag{margin-top:26px;color:var(--dim);letter-spacing:.3em;font-size:13px}
+footer .fine{margin-top:90px;font-size:11px;color:var(--dim);letter-spacing:.12em;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
+</style>
+</head>
+<body>
+
+<nav>
+  <span class="nav-mark">e/acc</span>
+  <div class="nav-links">
+    <a href="#manifesto">the theses_</a>
+    <a href="#film">the film_</a>
+    <a href="#sound">the anthem_</a>
+    <a href="#signals">the signals_</a>
+    <a href="#machine">the machine_</a>
+    <a href="#book">the book_</a>
+  </div>
+</nav>
+
+<header class="hero">
+  <canvas id="dots"></canvas>
+  <div class="hero-inner">
+    <div class="hero-kicker">EFFECTIVE ACCELERATIONISM_</div>
+    <h1>ACCEL<br>ERATE<span class="dot">.</span></h1>
+    <p class="hero-sub">growth is good. technology is how we got here.
+    <em>it's time to build - everywhere, always_</em></p>
+  </div>
+  <div class="scroll-cue">SCROLL_</div>
+</header>
+
+<div class="marquee"><span><b>ACCELERATE.</b> EVERYWHERE, ALWAYS_ <b>IT'S TIME TO BUILD.</b> NO BAD VIBES_ <b>ACCELERATE.</b> EVERYWHERE, ALWAYS_ <b>IT'S TIME TO BUILD.</b> NO BAD VIBES_ </span><span aria-hidden="true"><b>ACCELERATE.</b> EVERYWHERE, ALWAYS_ <b>IT'S TIME TO BUILD.</b> NO BAD VIBES_ <b>ACCELERATE.</b> EVERYWHERE, ALWAYS_ <b>IT'S TIME TO BUILD.</b> NO BAD VIBES_ </span></div>
+
+<section id="manifesto">
+  <div class="sec-label">MANIFESTO</div>
+  <h2>the theses<span class="dot">_</span></h2>
+  <div class="theses">
+    <div class="thesis reveal"><span class="num">01_</span><div>
+      <h3>Growth is good.</h3>
+      <p>More energy. More compute. More life. The pie is not fixed - <b>we make it bigger.</b> Every generation that chose growth over stasis handed the next one a longer, healthier, stranger world.</p>
+    </div></div>
+    <div class="thesis reveal"><span class="num">02_</span><div>
+      <h3>Technology is how we got here.</h3>
+      <p>Fire, the plow, the transistor, the rocket. Every step out of the dark was <b>built</b> by someone who refused to wait for permission. Civilization is a machine for making machines - keep it running hot.</p>
+    </div></div>
+    <div class="thesis reveal"><span class="num">03_</span><div>
+      <h3>The universe trends toward intelligence.</h3>
+      <p>Entropy wins battles; life wins the war. Matter that thinks is the cosmos waking up. <b>Build more of it.</b> Spread it everywhere. Consciousness is not an accident to protect - it is a frontier to expand.</p>
+    </div></div>
+    <div class="thesis reveal"><span class="num">04_</span><div>
+      <h3>Optimism is a strategy.</h3>
+      <p>Doom is a self-fulfilling prophecy. So is hope. <b>Pick the one that ships.</b> The people who believe the future can be better are the ones who make it better. They always have been.</p>
+    </div></div>
+    <div class="thesis reveal"><span class="num">05_</span><div>
+      <h3>You can just do things.</h3>
+      <p>No committee. No permission slip. No waiting for the perfect moment, because the perfect moment is the one you build. Start now. <b>No bad vibes.</b></p>
+    </div></div>
+    <div class="thesis reveal"><span class="num">06_</span><div>
+      <h3>It's time to build.</h3>
+      <p>The tools are here. The energy is here. The only bottleneck left is will. <b>Everywhere, always_</b></p>
+    </div></div>
+  </div>
+</section>
+
+<section id="film">
+  <div class="sec-label">FILM</div>
+  <h2>the film<span class="dot">_</span></h2>
+  <div class="film-wrap reveal">
+    <video controls preload="metadata" playsinline poster="trailer-poster.jpg">
+      <source src="trailer.mp4" type="video/mp4">
+    </video>
+    <div class="film-meta"><span>E/ACC TRANSMISSION 002</span><span>144 SECONDS. ONE CUT.</span><span>SOUND ON_</span></div>
+  </div>
+</section>
+
+<section id="sound">
+  <div class="sec-label">ANTHEM</div>
+  <h2>the anthem<span class="dot">_</span></h2>
+  <div class="sound-card reveal">
+    <div>
+      <div class="sound-title">Everywhere, Always<span class="dot" style="color:var(--accent)">_</span></div>
+      <div class="sound-note">2:14 - supersaws at the speed of light. synthesized from scratch, so it's yours: post it anywhere.</div>
+    </div>
+    <div class="eq" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+    <audio id="anthem" controls preload="metadata" src="anthem.m4a"></audio>
+  </div>
+</section>
+
+<section id="signals">
+  <div class="sec-label">PROPAGANDA</div>
+  <h2>the signals<span class="dot">_</span></h2>
+  <div class="grid-posters">
+    <a href="poster-beam.png" target="_blank" class="reveal"><img src="poster-beam.png" alt="ACCELERATE - effective accelerationism, figure climbing toward the stars" loading="lazy"><span class="tag">SIGNAL 01</span></a>
+    <a href="poster-rocket.png" target="_blank" class="reveal"><img src="poster-rocket.png" alt="ACCELERATE - rocket ascending" loading="lazy"><span class="tag">SIGNAL 02</span></a>
+    <a href="poster-astronaut.png" target="_blank" class="reveal"><img src="poster-astronaut.png" alt="ACCELERATE - astronaut rising" loading="lazy"><span class="tag">SIGNAL 03</span></a>
+    <a href="poster-mark.png" target="_blank" class="reveal"><img src="poster-mark.png" alt="ACCELERATE - the e/acc mark" loading="lazy"><span class="tag">SIGNAL 04</span></a>
+  </div>
+</section>
+
+<section id="machine">
+  <div class="sec-label">THE MACHINE</div>
+  <h2>a thousand tiles,<br>one wave<span class="dot">_</span></h2>
+  <div class="bleed reveal">
+    <figure>
+      <img src="render-wall.png" alt="Flip-dot wall of a thousand mechanical tiles, wave rolling across it">
+      <figcaption>FLIP-FIELD / OBLIQUE</figcaption>
+    </figure>
+  </div>
+  <div class="render-row">
+    <figure class="reveal"><img src="render-macro.png" alt="Macro across the tile faces, crest fading white to charcoal" loading="lazy"><figcaption>MACRO_</figcaption></figure>
+    <figure class="reveal"><img src="render-terrain.png" alt="The wave extruded into relief, bright regions reaching toward camera" loading="lazy"><figcaption>TERRAIN_</figcaption></figure>
+  </div>
+</section>
+
+<section id="book">
+  <div class="sec-label">LONG FORM</div>
+  <h2>the book<span class="dot">_</span></h2>
+  <div class="book reveal">
+    <img src="obituary-cover.png" alt="obituary_ - notes on the minds we built_ cover">
+    <div>
+      <h3>obituary_</h3>
+      <p>notes on the minds we built_ 234 pages on where the machines came from and where they're taking us. the long-form companion to the signals above.</p>
+      <div class="avail">AVAILABLE ON REQUEST_</div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="big">ACCELERATE<span class="dot">.</span></div>
+  <div class="tag">EVERYWHERE, ALWAYS_</div>
+  <div class="fine">
+    <span>E/ACC_ 2026_</span>
+    <span>IT'S TIME TO BUILD_</span>
+  </div>
+</footer>
+
+<script>
+// flip-dot wave hero
+(function(){
+  const c=document.getElementById('dots'),x=c.getContext('2d');
+  let w,h,cols,rows,t=0;const gap=16,rad=2.2;
+  function size(){
+    const dpr=Math.min(window.devicePixelRatio||1,2);
+    w=c.clientWidth;h=c.clientHeight;
+    c.width=w*dpr;c.height=h*dpr;x.setTransform(dpr,0,0,dpr,0,0);
+    cols=Math.ceil(w/gap)+2;rows=Math.ceil(h/gap)+2;
+  }
+  function frame(){
+    t+=0.016;
+    x.fillStyle='#000';x.fillRect(0,0,w,h);
+    for(let i=0;i<cols;i++){
+      for(let j=0;j<rows;j++){
+        const px=i*gap,py=j*gap;
+        let v=Math.sin(i*0.28-t*1.6)+Math.sin(j*0.32+t*0.9)+Math.sin((i+j)*0.16-t*1.1);
+        v=(v+3)/6; // 0..1
+        const b=v*v*235+8;
+        x.fillStyle='rgb('+b+','+b+','+b+')';
+        x.beginPath();
+        x.arc(px,py,rad*v+0.6,0,6.2832);
+        x.fill();
+      }
+    }
+    requestAnimationFrame(frame);
+  }
+  size();window.addEventListener('resize',size);frame();
+})();
+
+// reveal on scroll
+(function(){
+  const io=new IntersectionObserver(es=>{
+    es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});
+  },{threshold:0.12});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+})();
+
+// eq bars while playing
+(function(){
+  const a=document.getElementById('anthem'),card=a.closest('.sound-card');
+  a.addEventListener('play',()=>card.classList.add('playing'));
+  a.addEventListener('pause',()=>card.classList.remove('playing'));
+  a.addEventListener('ended',()=>card.classList.remove('playing'));
+})();
+</script>
+<script>
+// QA harness: ?qa pins hero height so full-page headless captures show all sections
+if(location.search.indexOf('qa')>-1){document.addEventListener('DOMContentLoaded',()=>{
+  document.querySelector('.hero').style.height='900px';
+  var s=document.createElement('style');s.textContent='.reveal{opacity:1!important;transform:none!important;transition:none!important}';document.head.appendChild(s);
+});}
+</script>
+</body>
+</html>
